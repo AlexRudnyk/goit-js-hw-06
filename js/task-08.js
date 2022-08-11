@@ -7,32 +7,32 @@
 //     Выведи обьект с введенными данными в консоль и очисти значения полей формы методом reset.
 
 const form = document.querySelector(".login-form");
-console.log("form", form);
+// console.log("form", form);
 
 form.addEventListener("submit", onFormSubmit);
 
 function onFormSubmit(event) {
   event.preventDefault();
-  console.log(event.currentTarget);
+  // console.log(event.currentTarget);
 
   if (
-    event.currentTarget.elements.email.value === "" ||
-    event.currentTarget.elements.password.value === ""
+    event.currentTarget.elements.email.value !== "" &&
+    event.currentTarget.elements.password.value !== ""
   ) {
+    const formElements = event.currentTarget.elements;
+
+    const mail = formElements.email.value;
+    const password = formElements.password.value;
+
+    const formData = {
+      mail,
+      password,
+    };
+    console.log("formData", formData);
+
+    formElements.email.value = "";
+    formElements.password.value = "";
+  } else {
     alert("Извините, все поля должны быть заполнены. Спасибо!");
   }
-
-  const formElements = event.currentTarget.elements;
-
-  const mail = formElements.email.value;
-  const password = formElements.password.value;
-
-  const formData = {
-    mail,
-    password,
-  };
-  console.log("formData", formData);
-
-  formElements.email.value = "";
-  formElements.password.value = "";
 }
