@@ -26,6 +26,8 @@ const controlsEl = document.querySelector("#controls");
 
 let amount = 0;
 
+let dimention = 20;
+
 inputEl.addEventListener("input", (event) => {
   amount = event.currentTarget.value;
   console.log("Amount: ", amount);
@@ -35,11 +37,15 @@ function createBoxes() {
   for (let i = 1; i <= amount; i += 1) {
     boxes.insertAdjacentHTML(
       "beforeend",
-      `<div style="width: ${i * 10 + 20 + "px"}; height: ${
+      `<div style="width: ${parseInt(dimention, 10) + 10 + "px"}; height: ${
         i * 10 + 20 + "px"
       }; background-color: ${getRandomHexColor()};"></div>`
     );
   }
+  const createdDiv = boxes.lastElementChild;
+  console.log("createdDiv: ", createdDiv);
+  dimention = createdDiv.style.width;
+  console.log("dimention: ", dimention);
 }
 
 function destroyBoxes() {
