@@ -26,31 +26,32 @@ const controlsEl = document.querySelector("#controls");
 
 let amount = 0;
 
-let dimention = 20;
-
 inputEl.addEventListener("input", (event) => {
   amount = event.currentTarget.value;
   console.log("Amount: ", amount);
 });
+
+let dimention = 20;
 
 function createBoxes() {
   for (let i = 1; i <= amount; i += 1) {
     boxes.insertAdjacentHTML(
       "beforeend",
       `<div style="width: ${parseInt(dimention, 10) + 10 + "px"}; height: ${
-        i * 10 + 20 + "px"
+        parseInt(dimention, 10) + 10 + "px"
       }; background-color: ${getRandomHexColor()};"></div>`
     );
+    const createdDiv = boxes.lastElementChild;
+    console.log("createdDiv: ", createdDiv);
+    dimention = createdDiv.style.width;
+    console.log("dimention: ", dimention);
   }
-  const createdDiv = boxes.lastElementChild;
-  console.log("createdDiv: ", createdDiv);
-  dimention = createdDiv.style.width;
-  console.log("dimention: ", dimention);
 }
 
 function destroyBoxes() {
   boxes.innerHTML = "";
   inputEl.value = "";
+  dimention = 20;
 }
 
 createBtn.addEventListener("click", createBoxes);
